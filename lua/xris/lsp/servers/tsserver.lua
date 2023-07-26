@@ -1,0 +1,2 @@
+-- tsserver
+return {}
