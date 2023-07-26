@@ -68,6 +68,7 @@ if dpy_setup then
   }
 end
 
+-- bufferline keymaps
 local NBufferline = {
   {"<leader>1", "<cmd>BufferLineGoToBuffer 1<CR>"},
   {"<leader>2", "<cmd>BufferLineGoToBuffer 2<CR>"},
