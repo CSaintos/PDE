@@ -42,9 +42,11 @@ for _, server in pairs(servers) do
     on_attach = require("xris.lsp.handlers").on_attach,
     capabilities = require("xris.lsp.handlers").capabilities,
   }
-  local s_setup, conf_opts = pcall(require, "user.lsp.settings."..server)
+  local s_setup, conf_opts = pcall(require, "xris.lsp.servers."..server)
   if s_setup then
     opts = vim.tbl_deep_extend("force", conf_opts, opts)
+  else 
+    print(server .. " lsp server settings not loaded")
   end
 
   lspconf[server].setup(opts)

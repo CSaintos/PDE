@@ -43,7 +43,7 @@ return packer.startup(function(use)
   use({"nvim-telescope/telescope.nvim",branch="0.1.x"}) -- fuzzy finder
   use("lewis6991/gitsigns.nvim") -- git signs
   use("goolord/alpha-nvim") -- nvim greeter
-  use({"iamcco/markdown-preview.nvim",run=function()vim.fn["mkdp#util#install"]() end,}) -- markdown preview
+  use({"iamcco/markdown-preview.nvim",run=function()vim.fn["mkdp#util#install()"]() end,}) -- markdown preview
   use({"akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons"}) -- bufferline
   use("famiu/bufdelete.nvim") -- bufferline delete fix
   use("lukas-reineke/indent-blankline.nvim") -- tab lines
