@@ -1,2 +1,0 @@
--- ruby_ls
-return {}

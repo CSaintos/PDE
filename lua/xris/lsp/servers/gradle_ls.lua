@@ -1,2 +1,0 @@
--- gradle_ls
-return {}

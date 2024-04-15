@@ -1,2 +1,0 @@
--- lemminx
-return {}

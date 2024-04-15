@@ -1,2 +1,0 @@
--- fsautocomplete
-return {}

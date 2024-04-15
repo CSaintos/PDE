@@ -1,2 +1,0 @@
--- jsonls
-return {}

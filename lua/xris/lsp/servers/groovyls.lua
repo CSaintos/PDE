@@ -1,2 +1,0 @@
--- groovyls
-return {}

@@ -1,27 +1,39 @@
--- Plugin Manager import
-require("xris.plugins-setup")
--- Core imports
-require("xris.core.options")
-require("xris.core.keymaps")
-require("xris.core.colorscheme")
--- Plugin imports
-require("xris.plugins.comment")
-require("xris.plugins.nvim-tree")
-require("xris.plugins.lualine")
-require("xris.plugins.telescope")
-require("xris.plugins.nvim-cmp")
-require("xris.plugins.autopairs")
-require("xris.plugins.treesitter")
-require("xris.plugins.gitsigns")
-require("xris.plugins.transparent")
-require("xris.plugins.alpha")
-require("xris.plugins.bufferline")
-require("xris.plugins.indent-blankline")
--- LSP imports
-require("xris.lsp.mason")
-require("xris.lsp.masonlsp")
-require("xris.lsp.handlers").setup()
-require("xris.lsp.null-ls")
--- Debug imports
-require("xris.debug.dap_ui")
-require("xris.debug.dap-python")
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+vim.g.mapleader = " "
+
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+if not vim.loop.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+local lazy_config = require "configs.lazy"
+
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+    config = function()
+      require "options"
+    end,
+  },
+
+  { import = "plugins" },
+}, lazy_config)
+
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
+require "nvchad.autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)

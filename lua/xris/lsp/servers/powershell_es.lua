@@ -1,2 +1,0 @@
--- powershell_es
-return {}

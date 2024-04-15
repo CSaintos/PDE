@@ -1,2 +1,0 @@
--- yamlls
-return {}

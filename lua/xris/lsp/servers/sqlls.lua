@@ -1,2 +1,0 @@
--- sqlls
-return {}
