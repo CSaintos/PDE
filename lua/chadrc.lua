@@ -6,6 +6,10 @@ local M = {}
 
 M.ui = {
 	theme = "radium",
+  transparency = true,
+  statusline = {
+    theme = "vscode_colored"
+  },
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
