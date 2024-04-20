@@ -28,4 +28,4 @@
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
 
 ## Special thanks to 
-- [@siduck](https://github.com/siduck), co-authors, and contributors for making the most popular Neovim commmon-plugin boilerplate removal config, as well as their custom ui and base46 plugins. My custom config wouldn't have been possible without you 😍.
+- [@siduck](https://github.com/siduck), co-authors, and contributors for making the most popular Neovim commmon-plugin boilerplate removal config [NvChad](https://github.com/NvChad/NvChad), as well as their custom ui and base46 plugins. My custom config wouldn't have been possible without you 😍.
