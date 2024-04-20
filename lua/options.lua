@@ -20,7 +20,7 @@ local opt = {
 
   -- shell
   sh = 'nu', -- set shell 
-  shellcmdflag ='-c nu' -- execute shell flags
+  shellcmdflag = '-c nu' -- execute shell flags
 }
 
 -- Local options
