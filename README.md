@@ -21,11 +21,14 @@
 <!-- - Once in nvim, navigate to line that says `use({"nvim-telescope/telescope-fzf-native.nvim",run="C:/MinGW/bin/mingw32-make.exe"}) -- telescope dependency` -->
 <!--   - Change text at `run="C:/..."` to your make installation path `run="path/to/make"`  -->
 <!--     - The make executable: for Unix is `make`, for windows is `mingw32-make.exe` -->
-- In nvim, type exactly `:MasonInstallAll` then press enter/return key.
+- In nvim, type exactly `:MasonInstallAll`.
   - Wait for Mason to install all lsps,formaters,debuggers,linters that come with NvChad by default before quiting `:q`
 - If you decided to use a shell other than ✨nushell✨, then you will need to update the `options.lua` file.
   - set `sh = ` to your preferred shell
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
+
+## Documentation
+- [NvChad docs](https://nvchad.com/docs/quickstart/post-install)
 
 ## Special thanks to 
 - [@siduck](https://github.com/siduck), co-authors, and contributors for making the most popular Neovim commmon-plugin boilerplate removal config [NvChad](https://github.com/NvChad/NvChad), as well as their custom ui and base46 plugins. My custom config wouldn't have been possible without you 😍.
