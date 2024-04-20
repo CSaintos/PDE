@@ -1,5 +1,5 @@
 require "nvchad.mappings"
-
+local M = {} -- keymap exports
 local map = vim.keymap.set
 
 --> Standard Keymaps
@@ -26,13 +26,10 @@ map("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Goto previous tab" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- nvimtree
-map("n", "<C-t>", function()
-  require("nvim-tree.api").tree.change_root_to_parent()
-end, { desc = "Nvimtree Set directory at cursor as root" })
-map("n", "h", function()
-  require("nvim-tree.api").node.navigate.parent_close()
-end, { desc = "Nvimtree close directory at cursor" })
-map("n", "l", function()
-  require("nvim-tree.api").node.open.edit()
-end, { desc = "Nvimtree open at cursor" })
+M.nvimtree_keys = function(nt_api, bufnr)
+  map("n", "<C-t>", nt_api.tree.change_root_to_parent, { desc = "Nvimtree set directory at cursor as root", buffer = bufnr})
+  map("n", "h", nt_api.node.navigate.parent_close, { desc = "Nvimtree close directory at cursor", buffer = bufnr})
+  map("n", "l", nt_api.node.open.edit, { desc = "Nvimtree open at cursor", buffer = bufnr})
+end
 
+return M
