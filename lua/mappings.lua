@@ -32,4 +32,8 @@ M.nvimtree_keys = function(nt_api, bufnr)
   map("n", "l", nt_api.node.open.edit, { desc = "Nvimtree open at cursor", buffer = bufnr})
 end
 
+M.mkpv_keys = function()
+  map("n", "<C-s>", "<cmd>MarkdownPreviewToggle<CR>", { desc = "MarkdownPreviewToggle" })
+end
+
 return M

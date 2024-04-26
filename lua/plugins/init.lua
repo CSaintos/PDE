@@ -17,6 +17,22 @@ return {
       require("nvim-tree").setup(opts)
     end,
   },
+  {
+    "RRethy/vim-illuminate",
+    lazy = false,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+    init = function() 
+      vim.g.mkdp_filetypes = { "markdown" }
+      require("mappings").mkpv_keys()
+    end,
+  },
 
   -- These are some examples, uncomment them if you want to see them work!
   -- {

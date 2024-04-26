@@ -14,6 +14,7 @@
 <!--   - If on Unix (Linux, macOS, etc.), [GNUMake](https://www.gnu.org/software/make/#download) -->
 <!--   - If on Windows, [MinGW-Make](https://winlibs.com/#download-release) -->
 - In your $HOME/.config directory, create directory 'nvim'
+- [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is necessary for building one of the plugins.
 
 ## Install 
 - From within your created 'nvim' directory clone this repository.
@@ -26,6 +27,8 @@
 - If you decided to use a shell other than ✨nushell✨, then you will need to update the `options.lua` file.
   - set `sh = ` to your preferred shell
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
+- Current bug with nushell and Lazy: markdown-preview will need to be installed manually due to unable to invoke shell.
+  - locate markdown-preview in `nvim-data/lazy/markdown-preview/app`, and run `npm install`
 
 ## Documentation
 - [NvChad docs](https://nvchad.com/docs/quickstart/post-install)
