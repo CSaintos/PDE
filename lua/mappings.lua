@@ -27,11 +27,12 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- nvimtree
 M.nvimtree_keys = function(nt_api, bufnr)
-  map("n", "<C-t>", nt_api.tree.change_root_to_parent, { desc = "Nvimtree set directory at cursor as root", buffer = bufnr})
+  map("n", "<C-p>", nt_api.tree.change_root_to_parent, { desc = "Nvimtree cd parent directory", buffer = bufnr})
   map("n", "h", nt_api.node.navigate.parent_close, { desc = "Nvimtree close directory at cursor", buffer = bufnr})
   map("n", "l", nt_api.node.open.edit, { desc = "Nvimtree open at cursor", buffer = bufnr})
 end
 
+-- markdown-preview
 M.mkpv_keys = function()
   map("n", "<C-s>", "<cmd>MarkdownPreviewToggle<CR>", { desc = "MarkdownPreviewToggle" })
 end

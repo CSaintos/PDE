@@ -4,7 +4,11 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls" }
+local servers =
+{
+  "html",
+  "cssls",
+}
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -15,8 +19,26 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- typescript
-lspconfig.tsserver.setup {
+-- csharp
+lspconfig.omnisharp.setup {
+  cmd = {vim.fn.stdpath "data" .. "/mason/bin/omnisharp.cmd"},
+  root_dir = function()
+    return vim.loop.cwd()
+  end,
+  enable_import_completion = true,
+  organize_imports_on_format = true,
+  enable_roslyn_analyzers = true,
+  filetypes = {"cs", "vb"},
+  settings = {
+    FormattingOptions = {
+      EnableEditorConfigSupport = true
+    },
+    MsBuild = {},
+    RoslynExtensionsOptions = {},
+    Sdk = {
+      IncludePrereleases = true
+    }
+  },
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,

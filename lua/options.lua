@@ -37,3 +37,5 @@ end
 for setting, value in pairs(opt) do
   vim.opt[setting] = value
 end
+
+vim.lsp.set_log_level("debug")
