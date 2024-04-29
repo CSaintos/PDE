@@ -1,5 +1,3 @@
 # Lazy plugin manager
 lazy-lock.json
 package-lock.json
-# lua lsp
-.stylua.toml
