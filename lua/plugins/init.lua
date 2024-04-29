@@ -28,9 +28,20 @@ return {
     build = function()
       vim.fn["mkdp#util#install"]()
     end,
-    init = function() 
+    init = function()
       vim.g.mkdp_filetypes = { "markdown" }
       require("mappings").mkpv_keys()
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "User FilePost",
+    config = function()
+      dofile(vim.g.base46_cache .. "blankline")
+
+      require "configs.indent-blankline"
+
+      dofile(vim.g.base46_cache .. "blankline")
     end,
   },
   {
