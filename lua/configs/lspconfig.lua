@@ -8,6 +8,8 @@ local servers =
 {
   "html",
   "cssls",
+  "vuels",
+  "eslint",
 }
 
 -- lsps with default config

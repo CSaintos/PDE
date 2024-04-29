@@ -29,6 +29,8 @@
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
 - Current bug with nushell and Lazy: markdown-preview will need to be installed manually due to unable to invoke shell.
   - locate markdown-preview in `nvim-data/lazy/markdown-preview/app`, and run `npm install`
+- To get the vue-language-server working you may need to install the vls parser. Execute `npm install -g vls`
+- To get the javascript/typescript linting engine to work. Execute `npm i -g vscode-langservers-extracted`
 
 ## Documentation
 - [NvChad docs](https://nvchad.com/docs/quickstart/post-install)
