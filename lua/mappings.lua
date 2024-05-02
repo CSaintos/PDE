@@ -37,4 +37,19 @@ M.mkpv_keys = function()
   map("n", "<C-s>", "<cmd>MarkdownPreviewToggle<CR>", { desc = "MarkdownPreviewToggle" })
 end
 
+-- dap 
+M.dap = {
+  plugin = true,
+  n = {
+    ["<leader>db"] = {
+      "<cmd>DapToggleBreakpoint <CR>",
+      "DAP add breakpoint at line"
+    },
+    ["<leader>dr"] = {
+      "<cmd>DapContinue<CR>",
+      "DAP run or continue the debugger"
+    },
+  }
+}
+
 return M

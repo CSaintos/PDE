@@ -9,7 +9,6 @@ local servers =
   "html",
   "cssls",
   "vuels",
-  "eslint",
 }
 
 -- lsps with default config
@@ -44,4 +43,15 @@ lspconfig.omnisharp.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+}
+
+-- javascript / typescript
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  init_options = {
+    preferences = {
+      disableSuggestions = true,
+    }
+  }
 }

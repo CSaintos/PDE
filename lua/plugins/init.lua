@@ -55,11 +55,13 @@ return {
   	"williamboman/mason.nvim",
   	opts = {
   		ensure_installed = {
-  			"lua-language-server",
-        "stylua",
-        "omnisharp",
-        "vue-language-server",
-        "typescript-language-server"
+  			"lua-language-server", -- lua lsp
+        "stylua", -- lua format
+        "omnisharp", -- csharp lsp
+        "vue-language-server", -- vue lsp
+        "typescript-language-server", -- javascript / typescript lsp
+        "eslint-lsp", -- javascript / typescript lint
+        "js-debug-adapter", -- javascript / typescript debug adapter
   		},
   	},
   },
@@ -78,4 +80,38 @@ return {
       },
   	},
   },
+  {
+    "mfussenegger/nvim-lint",
+    event = "VeryLazy",
+    config = function()
+      require "configs.lint"
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      -- require "configs.dap"
+      -- require("core.utils").load_mappings("dap")
+    end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = "mfussenegger/nvim-dap",
+    config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+      dapui.setup()
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end,
+    enabled = false
+  }
 }
