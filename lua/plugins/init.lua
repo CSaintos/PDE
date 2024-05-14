@@ -45,6 +45,31 @@ return {
     end,
   },
   {
+    "nvim-java/nvim-java",
+    dependencies = {
+      "nvim-java/lua-async-await",
+      "nvim-java/nvim-java-refactor",
+      "nvim-java/nvim-java-core",
+      "nvim-java/nvim-java-test",
+      "nvim-java/nvim-java-dap",
+      "MunifTanjim/nui.nvim",
+      "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap",
+      {
+        "williamboman/mason.nvim",
+        opts = {
+          registries = {
+            "github:nvim-java/mason-registry",
+            "github:mason-org/mason-registry"
+          }
+        }
+      }
+    },
+    config = function()
+      require("java").setup()
+    end
+  },
+  {
     "neovim/nvim-lspconfig",
     config = function()
       require("nvchad.configs.lspconfig").defaults()
@@ -62,6 +87,8 @@ return {
         "typescript-language-server", -- javascript / typescript lsp
         "eslint-lsp", -- javascript / typescript lint
         "js-debug-adapter", -- javascript / typescript debug adapter
+        "groovy-language-server", -- groovy lsp
+        "jdtls", -- java lsp
   		},
   	},
   },
@@ -77,6 +104,8 @@ return {
         "c_sharp",
         "vue",
         "javascript",
+        "java",
+        "groovy",
       },
   	},
   },

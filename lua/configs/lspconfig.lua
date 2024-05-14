@@ -4,6 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
+local root_pattern = lspconfig.util.root_pattern
 local servers =
 {
   "html",
@@ -54,4 +55,21 @@ lspconfig.tsserver.setup {
       disableSuggestions = true,
     }
   }
+}
+
+-- groovy
+lspconfig.groovyls.setup {
+  cmd = {vim.fn.stdpath "data" .. "/mason/bin/groovy-language-server.cmd"},
+  on_attach = on_attach,
+  capabilities = capabilities,
+  on_init = on_init,
+  root_dir = root_pattern("settings.gradle", ".git", "build.gradle", "gradlew")
+}
+
+-- java
+lspconfig.jdtls.setup{
+  cmd = {vim.fn.stdpath "data" .. "/mason/bin/jdtls.cmd"},
+  on_attach = on_attach,
+  capabilities = capabilities,
+  on_init = on_init,
 }
