@@ -10,6 +10,7 @@
 - Install [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 - (Optional) Install [Nushell](https://www.nushell.sh/book/installation.html) my personal favorite shell.
   <!-- - My [NuConfig](https://github.com/CSaintos/NuConfig) -->
+- (Optional) Install [Ripgrep](https://github.com/BurntSushi/ripgrep) Telescope grep improvement.
 - Install a [NerdFont](https://www.nerdfonts.com/) and set the nerdfont in your preferred terminal.
 - If on Windows, Download [MinGW-Make](https://winlibs.com/#download-release)
   - Recommend downloading the UCRT runtime, latest with POSIX threads, Win64, with LLVM..., as Zip archive.
