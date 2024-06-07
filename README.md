@@ -22,7 +22,7 @@
   - `XDG_CONFIG_HOME` = `C:/Users/<user>/.config`
 - Delete old neovim folders:
 ```bash
-# Unix 
+# Unix Bash 
 rm -rf ~/.config/nvim
 rm -rf ~/.local/share/nvim
 
