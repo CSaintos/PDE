@@ -37,6 +37,14 @@ M.mkpv_keys = function()
   map("n", "<C-s>", "<cmd>MarkdownPreviewToggle<CR>", { desc = "MarkdownPreviewToggle" })
 end
 
+-- vimtex
+M.vimtex_keys = function()
+  map("n", "<localleader>li", "<plug>(vimtex-info)", { desc = ":VimtexInfo" })
+  map("n", "<localleader>ll", "<plug>(vimtex-compile)", { desc = ":VimtexCompile" })
+  map("n", "<localleader>lk", "<plug>(vimtex-stop)", { desc = ":VimtexStop" })
+  map("n", "<localleader>lc", "<plug>(vimtex-clean)", { desc = ":VimtexClean" })
+end
+
 -- dap 
 M.dap = {
   plugin = true,

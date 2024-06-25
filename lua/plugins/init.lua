@@ -70,6 +70,13 @@ return {
     end
   },
   {
+    "lervag/vimtex",
+    lazy = false, -- vimtex is already lazy loaded by default
+    init = function()
+      require "configs.vimtex"
+    end
+  },
+  {
     "neovim/nvim-lspconfig",
     config = function()
       require("nvchad.configs.lspconfig").defaults()

@@ -46,6 +46,14 @@ rm ~/AppData/Local/nvim-data -Recurse -Force
 - To get the vue-language-server working you may need to install the vls parser. Execute `npm install -g vls`
 - To get the javascript/typescript linting engine to work. Execute `npm i -g vscode-langservers-extracted`
 
+## Language Support
+- Various (programming/scripting/markup) languages listed below are supported natively using this configuration.
+- The list also gives brief instructions on how to setup these languages on your machine. 
+### LaTeX
+- Prerequisites: 
+  - Install [TeX Live](https://www.tug.org/texlive/) (Contains Latex compiler and latexmk (build system))
+  - Install [Perl Language](https://www.activestate.com/products/perl/) (Various external plugins, packages, and tools (such as vimtex) of Latex require a native install of Perl)
+
 ## Documentation
 - [NvChad docs](https://nvchad.com/docs/quickstart/post-install)
 
