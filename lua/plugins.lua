@@ -84,6 +84,16 @@ return {
     end,
   },
   {
+    "L3MON4D3/LuaSnip",
+    dependencies = "rafamadriz/friendly-snippets",
+    opts = {history = true, updateevents = "TextChanged,TextChangedI"},
+    config = function(_, opts)
+      require("luasnip").config.set_config(opts)
+      require "nvchad.configs.luasnip"
+      require "snippets"
+    end,
+  },
+  {
   	"williamboman/mason.nvim",
   	opts = {
   		ensure_installed = {
