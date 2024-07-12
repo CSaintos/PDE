@@ -127,7 +127,7 @@ ls.add_snippets("make", {
       "else ifeq ($(BUILDTYPE), STATICLIB)",
       "\t$(AR) -rcs $(TARGET) $(OBJECTS)",
       "else ifeq ($(BUILDTYPE), DYNAMICLIB)",
-      "\t$(CXX) -shared -o $(TARGET) $(OBJECTS) $(LINKDIRS) -Wl,-Bstatic $(SLINKS) -Wl,-Ddynamic $(DLINKS) -Wl,--as-needed",
+      "\t$(CXX) -shared -o $(TARGET) $(OBJECTS) $(LINKDIRS) -Wl,-Bstatic $(SLINKS) -Wl,-Bdynamic $(DLINKS) -Wl,--as-needed",
       "endif",
       "\t@echo built",
       "",
