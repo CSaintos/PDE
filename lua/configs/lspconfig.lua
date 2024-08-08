@@ -1,12 +1,11 @@
--- EXAMPLE 
+-- EXAMPLE
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 local root_pattern = lspconfig.util.root_pattern
-local servers =
-{
+local servers = {
   "html",
   "cssls",
   "vuels",
@@ -23,23 +22,23 @@ end
 
 -- csharp
 lspconfig.omnisharp.setup {
-  cmd = {vim.fn.stdpath "data" .. "/mason/bin/omnisharp.cmd"},
+  cmd = { vim.fn.stdpath "data" .. "/mason/bin/omnisharp.cmd" },
   root_dir = function()
     return vim.loop.cwd()
   end,
   enable_import_completion = true,
   organize_imports_on_format = true,
   enable_roslyn_analyzers = true,
-  filetypes = {"cs", "vb"},
+  filetypes = { "cs", "vb" },
   settings = {
     FormattingOptions = {
-      EnableEditorConfigSupport = true
+      EnableEditorConfigSupport = true,
     },
     MsBuild = {},
     RoslynExtensionsOptions = {},
     Sdk = {
-      IncludePrereleases = true
-    }
+      IncludePrereleases = true,
+    },
   },
   on_attach = on_attach,
   on_init = on_init,
@@ -53,23 +52,45 @@ lspconfig.tsserver.setup {
   init_options = {
     preferences = {
       disableSuggestions = true,
-    }
-  }
+    },
+  },
 }
 
 -- groovy
 lspconfig.groovyls.setup {
-  cmd = {vim.fn.stdpath "data" .. "/mason/bin/groovy-language-server.cmd"},
+  cmd = { vim.fn.stdpath "data" .. "/mason/bin/groovy-language-server.cmd" },
   on_attach = on_attach,
   capabilities = capabilities,
   on_init = on_init,
-  root_dir = root_pattern("settings.gradle", ".git", "build.gradle", "gradlew")
+  root_dir = root_pattern("settings.gradle", ".git", "build.gradle", "gradlew"),
 }
 
 -- java
-lspconfig.jdtls.setup{
-  cmd = {vim.fn.stdpath "data" .. "/mason/bin/jdtls.cmd"},
+lspconfig.jdtls.setup {
+  cmd = { vim.fn.stdpath "data" .. "/mason/bin/jdtls.cmd" },
   on_attach = on_attach,
   capabilities = capabilities,
   on_init = on_init,
+}
+
+-- cpp
+lspconfig.clangd.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  on_init = on_init,
+  cmd = {
+    -- see clangd --help-hidden
+    "clangd",
+    "--clang-tidy",
+    "--background-index",
+    "--completion-style=detailed",
+    "--enable-config",
+    '--query-driver="clang++.exe"',
+  },
+  init_options = {
+    clangdFileStatus = true, -- Provides info about activity on clangd's per-file worker thread
+    usePlaceholders = true,
+    completeUnimported = true,
+    semanticHighlighting = true,
+  },
 }

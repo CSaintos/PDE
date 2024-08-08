@@ -12,11 +12,12 @@
   <!-- - My [NuConfig](https://github.com/CSaintos/NuConfig) -->
 - (Optional) Install [Ripgrep](https://github.com/BurntSushi/ripgrep) Telescope grep improvement.
 - Install a [NerdFont](https://www.nerdfonts.com/) and set the nerdfont in your preferred terminal.
-- If on Windows, Download [MinGW-Make](https://winlibs.com/#download-release)
-  - Recommend downloading the UCRT runtime, latest with POSIX threads, Win64, with LLVM..., as Zip archive.
-  - Extract, rename to `MinGW`, move `MinGW` to `C:/MinGW`.
-  - In `C:/MinGW/bin` copy `copy mingw32-make.exe make.exe`
-  - Add `C:/MinGW/bin` to system path (environment variables).
+- If on Windows, Download [msys2](https://www.msys2.org/)
+  - run the installer.
+  - Start the MSYS2 application, run `pacman -Syu` to update packages.
+  - Install make: `pacman -S mingw-w64-ucrt64-x86_64-make`
+  - In `C:/msys64/ucrt64/bin` copy `copy mingw32-make.exe make.exe`
+  - Add `C:/msys64/ucrt64/bin` to system path (environment variables).
 - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is necessary for building one of the plugins.
 - If on Windows, Create a System environment variable
   - `XDG_CONFIG_HOME` = `C:/Users/<user>/.config`
@@ -53,6 +54,39 @@ rm ~/AppData/Local/nvim-data -Recurse -Force
 - Prerequisites: 
   - Install [TeX Live](https://www.tug.org/texlive/) (Contains Latex compiler and latexmk (build system))
   - Install [Perl Language](https://www.activestate.com/products/perl/) (Various external plugins, packages, and tools (such as vimtex) of Latex require a native install of Perl)
+### C++
+- Prerequisites:
+  - Install a Cpp compiler suite.
+    - Windows
+      - [msys2](https://www.msys2.org/)
+      - Start the MSYS2 application, run `pacman -Syu` to update packages.
+      - Install clang: `pacman -S mingw-w64-ucrt64-x86_64-clang`
+  - Create a [Clangd config](https://clangd.llvm.org/config#files).
+    - ex:
+```yml
+CompileFlags:
+  Compiler: clang++.exe
+  Add: ["--target=x86_64-w64-windows-gnu"]
+  Remove: -f*
+Diagnostics:
+  UnusedIncludes: None
+```
+- Requirements
+  - Any cpp project will need a compile_commands.json (Compilation database)
+  - It will be used by clangd (for syntax highlighting/linting). So it only needs minimal info as below
+```json
+[
+  {
+    "directory": "<absolute>/<path>/<to>/<project-dir>",
+    "arguments": [
+      "clang++.exe",
+      "-I<include>",
+      "-I<include>/<dir>/<path>"
+    ],
+    "file": "./<path>/<to>/<any>/<project>/<cpp>/<file>.cpp"
+  }
+]
+```
 
 ## Documentation
 - [NvChad docs](https://nvchad.com/docs/quickstart/post-install)

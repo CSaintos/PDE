@@ -60,21 +60,21 @@ return {
         opts = {
           registries = {
             "github:nvim-java/mason-registry",
-            "github:mason-org/mason-registry"
-          }
-        }
-      }
+            "github:mason-org/mason-registry",
+          },
+        },
+      },
     },
     config = function()
       require("java").setup()
-    end
+    end,
   },
   {
     "lervag/vimtex",
     lazy = false, -- vimtex is already lazy loaded by default
     init = function()
       require "configs.vimtex"
-    end
+    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -86,7 +86,7 @@ return {
   {
     "L3MON4D3/LuaSnip",
     dependencies = "rafamadriz/friendly-snippets",
-    opts = {history = true, updateevents = "TextChanged,TextChangedI"},
+    opts = { history = true, updateevents = "TextChanged,TextChangedI" },
     config = function(_, opts)
       require("luasnip").config.set_config(opts)
       require "nvchad.configs.luasnip"
@@ -94,10 +94,10 @@ return {
     end,
   },
   {
-  	"williamboman/mason.nvim",
-  	opts = {
-  		ensure_installed = {
-  			"lua-language-server", -- lua lsp
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "lua-language-server", -- lua lsp
         "stylua", -- lua format
         "omnisharp", -- csharp lsp
         "vue-language-server", -- vue lsp
@@ -106,14 +106,15 @@ return {
         "js-debug-adapter", -- javascript / typescript debug adapter
         "groovy-language-server", -- groovy lsp
         "jdtls", -- java lsp
-  		},
-  	},
+        "clangd", -- cpp lsp
+      },
+    },
   },
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim",
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
         "lua",
         "vimdoc",
         "html",
@@ -123,8 +124,9 @@ return {
         "javascript",
         "java",
         "groovy",
+        "cpp",
       },
-  	},
+    },
   },
   {
     "mfussenegger/nvim-lint",
@@ -145,8 +147,8 @@ return {
     event = "VeryLazy",
     dependencies = "mfussenegger/nvim-dap",
     config = function()
-      local dap = require("dap")
-      local dapui = require("dapui")
+      local dap = require "dap"
+      local dapui = require "dapui"
       dapui.setup()
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
@@ -158,6 +160,6 @@ return {
         dapui.close()
       end
     end,
-    enabled = false
-  }
+    enabled = false,
+  },
 }
