@@ -28,9 +28,11 @@ return {
     build = function()
       vim.fn["mkdp#util#install"]()
     end,
+    config = function()
+      require "configs.markdown-preview"
+    end,
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
-      require("mappings").mkpv_keys()
     end,
   },
   {
