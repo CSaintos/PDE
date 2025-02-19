@@ -8,7 +8,9 @@ local root_pattern = lspconfig.util.root_pattern
 local servers = {
   "html",
   "cssls",
+  "eslint",
   "vuels",
+  "nushell"
 }
 
 -- lsps with default config

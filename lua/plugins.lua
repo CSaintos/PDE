@@ -1,5 +1,9 @@
 return {
   {
+    "LunarVim/bigfile.nvim",
+    lazy = false
+  },
+  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     config = function()
@@ -20,6 +24,9 @@ return {
   {
     "RRethy/vim-illuminate",
     lazy = false,
+  },
+  {
+    "norcalli/nvim-colorizer.lua"
   },
   {
     "iamcco/markdown-preview.nvim",
