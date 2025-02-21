@@ -17,4 +17,4 @@ local options = {
   log_level = vim.log.levels.ERROR,
 }
 
-require("conform").setup(options)
+return options

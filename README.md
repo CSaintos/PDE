@@ -1,4 +1,4 @@
-# PDE
+<h1 align="center">PDE</h1>
 
 - My Personal Development Environment (dotfiles)
 - Custom child config of [NvChad](https://github.com/NvChad/NvChad)
@@ -28,7 +28,7 @@ rm -rf ~/.config/nvim
 rm -rf ~/.local/share/nvim
 
 # Windows Powershell
-rm ~/AppData/Local/nvim -Recurse -Force
+rm ~/.config/nvim -Recurse -Force
 rm ~/AppData/Local/nvim-data -Recurse -Force
 ```
 
@@ -38,11 +38,11 @@ rm ~/AppData/Local/nvim-data -Recurse -Force
 <!--   - Change text at `run="C:/..."` to your make installation path `run="path/to/make"`  -->
 <!--     - The make executable: for Unix is `make`, for windows is `mingw32-make.exe` -->
 - Wait for Lazy to install plugins then type `:MasonInstallAll`.
-  - Wait for Mason to install all lsps,formaters,debuggers,linters that come with NvChad by default before quiting `:q`
-- If you decided to use a shell other than ✨nushell✨, then you will need to update the `options.lua` file.
+  - Wait for Mason to install all lsps, formaters, debuggers, and linters that come with NvChad by default before quiting `:qa`
+- If you decide to use a shell other than ✨nushell✨, then you will need to update the `options.lua` file.
   - set `sh = ` to your preferred shell
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
-- Current bug with nushell and Lazy: markdown-preview will need to be installed manually due to unable to invoke shell.
+- Current bug with nushell and Lazy: markdown-preview will need to be installed manually due to unable to invoke nushell.
   - locate markdown-preview in `nvim-data/lazy/markdown-preview/app`, and run `npm install`
 - To get the vue-language-server working you may need to install the vls parser. Execute `npm install -g vls`
 - To get the javascript/typescript linting engine to work. Execute `npm i -g vscode-langservers-extracted`
@@ -73,17 +73,16 @@ Diagnostics:
 ```
 - Requirements
   - Any cpp project will need a compile_commands.json (Compilation database)
-  - It will be used by clangd (for syntax highlighting/linting). So it only needs minimal info as below
+  - It will be used by clangd (for linting and code completions). So it only needs minimal info as below
 ```json
 [
   {
-    "directory": "<absolute>/<path>/<to>/<project-dir>",
+    "directory": "<absolute_path_to_project_dir>",
     "arguments": [
       "clang++.exe",
-      "-I<include>",
-      "-I<include>/<dir>/<path>"
+      "-I<include_dir>"
     ],
-    "file": "./<path>/<to>/<any>/<project>/<cpp>/<file>.cpp"
+    "file": "./<path_to_any_cpp_file_in_project>.cpp"
   }
 ]
 ```
