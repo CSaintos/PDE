@@ -27,3 +27,6 @@
 
 ## treesitter
 - mappings are in config file
+
+## markdown-preview 
+- fix the build task

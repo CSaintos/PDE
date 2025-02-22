@@ -42,8 +42,14 @@ map("n", "<leader>tp", "<cmd>tabp<cr>", { desc = "Goto previous tab" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
 -- Visual Mode Keymaps
 map("v", "<leader>/", "gc", { desc = "comment toggle", remap = true })
+map("v", "<", "<gv", { desc = "forward shift indent + indent mode" })
+map("v", ">", ">gv", { desc = "backward shift indent + indent mode" })
 -- Terminal Mode Keymaps
-map("t", "<C-x>", "<C-\\><C-N>", { desc = "escape terminal mode", })
+map("t", "<C-x>", "<C-\\><C-N>", { desc = "escape terminal mode" })
+-- x mode Keymaps
+map("x", "p", [["_dP]], { desc = "paste again" })
+map({ "n", "o", "x" }, "<S-h>", "^", { desc = "goto beginning of line (text)" })
+map({ "n", "o", "x" }, "<S-l>", "g_", { desc = "goto end of line (text)" })
 
 -- nvimtree
 M.nvimtree_attach = function(nt_api, bufnr)
@@ -53,8 +59,8 @@ M.nvimtree_attach = function(nt_api, bufnr)
 end
 
 M.nvimtree = function()
-  map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", { desc = "nvimtree toggle window"})
-  map("n", "<leader>e", "<cmd>NvimTreeFocus<cr>", { desc = "nvimtree focus window"})
+  map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", { desc = "nvimtree toggle window" })
+  map("n", "<leader>e", "<cmd>NvimTreeFocus<cr>", { desc = "nvimtree focus window" })
 end
 
 -- markdown-preview
@@ -72,36 +78,36 @@ end
 
 -- lspconfig
 M.lspconfig_attach = function(bufnr)
-  map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP Go to declaration", buffer = bufnr})
-  map("n", "gd", vim.lsp.buf.definition, { desc = "LSP Go to definition", buffer = bufnr})
-  map("n", "gi", vim.lsp.buf.implementation, { desc = "LSP Go to implementation", buffer = bufnr})
-  map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "LSP Show signature", buffer = bufnr})
-  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "LSP Add workspace folder", buffer = bufnr})
-  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "LSP Remove workspace folder", buffer = bufnr})
+  map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP Go to declaration", buffer = bufnr })
+  map("n", "gd", vim.lsp.buf.definition, { desc = "LSP Go to definition", buffer = bufnr })
+  map("n", "gi", vim.lsp.buf.implementation, { desc = "LSP Go to implementation", buffer = bufnr })
+  map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "LSP Show signature", buffer = bufnr })
+  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "LSP Add workspace folder", buffer = bufnr })
+  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "LSP Remove workspace folder", buffer = bufnr })
   map("n", "<leader>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, { desc = "LSP List workspace folder", buffer = bufnr})
-  map("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "LSP Go to type definition", buffer = bufnr})
+  end, { desc = "LSP List workspace folder", buffer = bufnr })
+  map("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "LSP Go to type definition", buffer = bufnr })
   map("n", "<leader>ra", function()
-    require("nvchad.lsp.renamer")()
-  end, { desc = "LSP NvRenamer", buffer = bufnr})
-  map({"n", "v"}, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code action", buffer = bufnr})
-  map("n", "gr", vim.lsp.buf.references, { desc = "LSP Show references", buffer = bufnr})
+    require "nvchad.lsp.renamer"()
+  end, { desc = "LSP NvRenamer", buffer = bufnr })
+  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code action", buffer = bufnr })
+  map("n", "gr", vim.lsp.buf.references, { desc = "LSP Show references", buffer = bufnr })
 end
 
--- dap 
+-- dap
 M.dap = {
   plugin = true,
   n = {
     ["<leader>db"] = {
       "<cmd>DapToggleBreakpoint<cr>",
-      "DAP add breakpoint at line"
+      "DAP add breakpoint at line",
     },
     ["<leader>dr"] = {
       "<cmd>DapContinue<cr>",
-      "DAP run or continue the debugger"
+      "DAP run or continue the debugger",
     },
-  }
+  },
 }
 
 -- NvCheatsheet
@@ -111,15 +117,23 @@ end
 
 -- Conform
 M.Conform = function(c_api)
-  map("n", "<leader>fm", function() c_api.format({ lsp_fallback = true }) end, { desc = "format files"})
+  map("n", "<leader>fm", function()
+    c_api.format { lsp_fallback = true }
+  end, { desc = "format files" })
 end
 
 -- Tabufline
 M.Tabufline = function(tfl_api)
   map("n", "<leader>b", "<cmd>enew<cr>", { desc = "buffer new" })
-  map("n", "<tab>", function() tfl_api.next() end, { desc = "goto next buffer" })
-  map("n", "<S-tab>", function() tfl_api.prev() end, { desc = "goto prev buffer" })
-  map("n", "<leader>x", function() tfl_api.close_buffer() end, { desc = "close buffer" })
+  map("n", "<tab>", function()
+    tfl_api.next()
+  end, { desc = "goto next buffer" })
+  map("n", "<S-tab>", function()
+    tfl_api.prev()
+  end, { desc = "goto prev buffer" })
+  map("n", "<leader>x", function()
+    tfl_api.close_buffer()
+  end, { desc = "close buffer" })
 end
 
 -- Telescope
@@ -135,22 +149,37 @@ M.telescope = function()
   map("n", "<leader>pt", "<cmd>Telescope terms<cr>", { desc = "telescope pick hidden term" })
   map("n", "<leader>th", "<cmd>Telescope themes<cr>", { desc = "telescope nvchad themes" })
   map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
-  map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<cr>", { desc = "telescope find all files" })
+  map(
+    "n",
+    "<leader>fa",
+    "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<cr>",
+    { desc = "telescope find all files" }
+  )
 end
 
 -- chadterm
 M.chadterm = function(ct_api)
-  map("n", "<leader>h", function() ct_api.new({pos = "sp"}) end, { desc = "new horizontal term" })
-  map("n", "<leader>v", function() ct_api.new({pos = "vsp"}) end, { desc = "new vertial term" })
-  map({"n", "t"}, "<A-v>", function() ct_api.toggle({pos = "vsp", id = "vtoggleTerm"}) end, {desc = "toggle vertical term"})
-  map({"n", "t"}, "<A-h>", function() ct_api.toggle({pos = "sp", id = "htoggleTerm"}) end, {desc = "toggle horizontal term"})
-  map({"n", "t"}, "<A-i>", function() ct_api.toggle({pos = "float", id = "floatTerm"}) end, {desc = "toggle float term"})
+  map("n", "<leader>h", function()
+    ct_api.new { pos = "sp" }
+  end, { desc = "new horizontal term" })
+  map("n", "<leader>v", function()
+    ct_api.new { pos = "vsp" }
+  end, { desc = "new vertial term" })
+  map({ "n", "t" }, "<A-v>", function()
+    ct_api.toggle { pos = "vsp", id = "vtoggleTerm" }
+  end, { desc = "toggle vertical term" })
+  map({ "n", "t" }, "<A-h>", function()
+    ct_api.toggle { pos = "sp", id = "htoggleTerm" }
+  end, { desc = "toggle horizontal term" })
+  map({ "n", "t" }, "<A-i>", function()
+    ct_api.toggle { pos = "float", id = "floatTerm" }
+  end, { desc = "toggle float term" })
 end
 
 -- whichkey
 M.whichkey = function()
   map("n", "<leader>wk", function()
-    vim.cmd("Whichkey " .. vim.fn.input("WhichKey: "))
+    vim.cmd("Whichkey " .. vim.fn.input "WhichKey: ")
   end, { desc = "whichkey query lookup" })
   map("n", "<leader>wK", "<cmd>WhichKey <cr>", { desc = "whichkey all keymaps" })
 end
@@ -158,15 +187,15 @@ end
 -- blankline
 M.blankline = function(ibl_api)
   map("n", "<leader>cc", function()
-    local config = { scope = {}}
-    config.scope.exclude = { language = {}, node_type = {}}
-    config.scope.include = { node_type = {}}
+    local config = { scope = {} }
+    config.scope.exclude = { language = {}, node_type = {} }
+    config.scope.include = { node_type = {} }
     local node = ibl_api.get(vim.api.nvim_get_current_buf(), config)
 
     if node then
       local start_row, _, end_row, _ = node:range()
       if start_row ~= end_row then
-        vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), {start_row + 1, 0})
+        vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start_row + 1, 0 })
         vim.api.nvim_feedkeys("_", "n", true)
       end
     end
