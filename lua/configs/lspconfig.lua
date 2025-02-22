@@ -1,7 +1,7 @@
 local M = {}
 
 M.on_attach = function(_, bufnr)
-  require("mappings").lspconfig(bufnr)
+  require("mappings").lspconfig_attach(bufnr)
 end
 
 M.on_init = function(client, _)

@@ -12,7 +12,7 @@ local options = {
 
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
-    require("mappings").gitsigns(gs, bufnr)
+    require("mappings").gitsigns_attach(gs, bufnr)
   end
 }
 

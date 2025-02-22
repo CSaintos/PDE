@@ -78,7 +78,7 @@ end
 
 local function my_on_attach(bufnr)
   nt_api.config.mappings.default_on_attach(bufnr)
-  require("mappings").nvimtree_keys(nt_api, bufnr)
+  require("mappings").nvimtree_attach(nt_api, bufnr)
 end
 
 options.actions.open_file = {
@@ -89,6 +89,5 @@ options.actions.open_file = {
 }
 
 options.on_attach = my_on_attach
-
 
 return options

@@ -1,19 +1,22 @@
 return {
   -- lua-neovim modules
   {
-    "nvim-lua/plenary.nvim"
+    "nvim-lua/plenary.nvim",
   },
   -- plugin disabler for large files
   {
     "LunarVim/bigfile.nvim",
-    lazy = false
+    lazy = false,
   },
   -- file manager
   {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    init = function()
+      vim.schedule(require("mappings").nvimtree)
+    end,
     opts = function()
-      return require("configs.nvimtree")
+      return require "configs.nvimtree"
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "nvimtree")
@@ -24,40 +27,46 @@ return {
   {
     "nvim-tree/nvim-web-devicons",
     opts = function()
-      return { override = require("nvchad.icons.devicons")}
+      return { override = require "nvchad.icons.devicons" }
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "devicons")
       require("nvim-web-devicons").setup(opts)
-    end
+    end,
   },
   -- shortcuts helper ui
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g"},
+    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     cmd = "WhichKey",
+    init = function()
+      vim.schedule(require("mappings").whichkey)
+    end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "whichkey")
       require("which-key").setup(opts)
-    end
+    end,
   },
   -- fuzzy file finder
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = "Telescope",
+    init = function()
+      vim.schedule(require("mappings").telescope)
+    end,
     opts = function()
-      return require("configs/telescope.lua")
+      return require "configs.telescope"
     end,
     config = function(_, opts)
-      local telescope = require("telescope")
+      local telescope = require "telescope"
       telescope.setup(opts)
 
       -- load extensions
       for _, ext in ipairs(opts.extensions_list) do
         telescope.load_extension(ext)
       end
-    end
+    end,
   },
   -- highlighter for other uses of a word
   {
@@ -69,11 +78,11 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "User FilePost",
     opts = function()
-      return require("configs/gitsigns.lua")
+      return require "configs.gitsigns"
     end,
     config = function(_, opts)
       require("gitsigns").setup(opts)
-    end
+    end,
   },
   -- Indentation guides
   {
@@ -81,15 +90,21 @@ return {
     event = "User FilePost",
     opts = {
       indent = { char = "│", highlight = "IblChar" },
-      scope = { char = "│", highlight = "IblScopeChar" }
+      scope = { char = "│", highlight = "IblScopeChar" },
     },
+    init = function()
+      vim.schedule(function()
+        local ibl_api = require("ibl.scope")
+        require("mappings").blankline(ibl_api)
+      end)
+    end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "blankline")
 
-      local hooks = require("ibl.hooks")
+      local hooks = require "ibl.hooks"
       hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
       require("ibl").setup(opts)
-      require("configs.indent-blankline")
+      require "configs.indent-blankline"
 
       dofile(vim.g.base46_cache .. "blankline")
     end,
@@ -99,33 +114,42 @@ return {
     branch = "v2.5",
     build = function()
       require("base46").load_all_highlights()
-    end
+    end,
   },
   {
     "NvChad/ui",
     branch = "v2.5",
     lazy = false,
+    init = function()
+      vim.schedule(function()
+        local tfl_api = require("nvchad.tabufline")
+        require("mappings").Tabufline(tfl_api)
+        require("mappings").NvCheatsheet()
+        local ct_api = require("nvchad.term")
+        require("mappings").chadterm(ct_api)
+      end)
+    end,
     config = function()
-      require("nvchad")
-    end
+      require "nvchad"
+    end,
   },
   -- RGB hexcode coloring
   {
-    "norcalli/nvim-colorizer.lua"
+    "norcalli/nvim-colorizer.lua",
   },
   {
     "NvChad/nvim-colorizer.lua",
     event = "User FilePost",
-    opts = { user_default_options = { names = false }},
+    opts = { user_default_options = { names = false } },
     config = function(_, opts)
       require("colorizer").setup(opts)
       -- execute colorizer asap
       vim.defer_fn(function()
         require("colorizer").attach_to_buffer(0)
       end, 0)
-    end
+    end,
   },
-  -- REPL for markdown in browser 
+  -- REPL for markdown in browser
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -133,24 +157,31 @@ return {
     build = function()
       vim.fn["mkdp#util#install"]()
     end,
-    config = function()
-      require "configs.markdown-preview"
-    end,
     init = function()
+      vim.schedule(require("mappings").mkpv)
       vim.g.mkdp_filetypes = { "markdown" }
     end,
+    config = function()
+      require "configs.markdown-preview"
+    end
   },
   -- code formatter
   {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        lua = { "stylua" }
-      }
+        lua = { "stylua" },
+      },
     },
+    init = function()
+      vim.schedule(function()
+        local c_api = require("conform")
+        require("mappings").Conform(c_api)
+      end)
+    end,
     -- event = 'BufWritePre', -- uncomment for format on save
     config = function(_, opts)
-      local options = require("utils").concat_kv_tables(opts, require("configs/conform.lua"))
+      local options = require("utils").concat_kv_tables(opts, require "configs.conform")
       require("conform").setup(options)
     end,
   },
@@ -165,7 +196,7 @@ return {
     end,
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
-    end
+    end,
   },
   -- code completions
   {
@@ -179,9 +210,9 @@ return {
         opts = { history = true, updateevents = "TextChanged, TextChangedI" },
         config = function(_, opts)
           require("luasnip").config.set_config(opts)
-          require("configs/luasnip.lua")
-          require("snippets")
-        end
+          require "configs.luasnip"
+          require "snippets"
+        end,
       },
       -- autopairing of (){}[]<>
       {
@@ -194,9 +225,9 @@ return {
           require("nvim-autopairs").setup(opts)
 
           -- setup cmp for autopairs
-          local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
           require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-        end
+        end,
       },
       -- cmp sources plugins
       {
@@ -204,22 +235,22 @@ return {
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path"
-      }
+        "hrsh7th/cmp-path",
+      },
     },
     opts = function()
-      return require("configs/cmp.lua")
+      return require "configs.cmp"
     end,
     config = function(_, opts)
       require("cmp").setup(opts)
-    end
+    end,
   },
   -- lsp servers package manager
   {
     "williamboman/mason.nvim",
-    cmd = {"Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate"},
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = function()
-      return require("configs/mason.lua")
+      return require "configs/mason"
     end,
     config = function(_, opts)
       require("mason").setup(opts)
@@ -227,7 +258,7 @@ return {
       vim.api.nvim_create_user_command("MasonInstallAll", function()
         require("nvchad.mason").install_all(opts.ensure_installed)
       end, {})
-    end
+    end,
   },
   -- lsp servers additional configs
   {
@@ -235,7 +266,7 @@ return {
     event = "User FilePost",
     config = function()
       require("configs.lspconfig").defaults()
-      require("configs.lspconfig")
+      require "configs.lspconfig"
     end,
   },
 
@@ -279,6 +310,7 @@ return {
     lazy = false, -- vimtex is already lazy loaded by default
     init = function()
       require "configs.vimtex"
+      vim.schedule(require("mappings").vimtex)
     end,
   },
   -- debug adapter server manager

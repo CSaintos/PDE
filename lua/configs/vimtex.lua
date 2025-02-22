@@ -17,5 +17,3 @@ vim.g.vimtex_log_ignore = ({
   "specifier changed to",
   "Token no allowed in a PDF string",
 })
-
-require("mappings").vimtex_keys()

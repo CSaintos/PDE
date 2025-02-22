@@ -11,5 +11,3 @@ vim.g.mkdp_preview_options = {
     server = "http://localhost:4000/plantuml"
   }
 }
-
-require("mappings").mkpv_keys()

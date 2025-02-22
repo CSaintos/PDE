@@ -1,4 +1,3 @@
-require "nvchad.mappings"
 local M = {} -- keymap exports
 local map = vim.keymap.set
 
@@ -47,21 +46,24 @@ map("v", "<leader>/", "gc", { desc = "comment toggle", remap = true })
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "escape terminal mode", })
 
 -- nvimtree
-M.nvimtree_keys = function(nt_api, bufnr)
+M.nvimtree_attach = function(nt_api, bufnr)
   map("n", "<C-p>", nt_api.tree.change_root_to_parent, { desc = "Nvimtree cd parent directory", buffer = bufnr })
   map("n", "h", nt_api.node.navigate.parent_close, { desc = "Nvimtree close directory at cursor", buffer = bufnr })
   map("n", "l", nt_api.node.open.edit, { desc = "Nvimtree open at cursor", buffer = bufnr })
-  map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", { desc = "nvimtree toggle window" })
-  map("n", "<leader>e", "<cmd>NvimTreeFocus<cr>", { desc = "nvimtree focus window" })
+end
+
+M.nvimtree = function()
+  map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", { desc = "nvimtree toggle window"})
+  map("n", "<leader>e", "<cmd>NvimTreeFocus<cr>", { desc = "nvimtree focus window"})
 end
 
 -- markdown-preview
-M.mkpv_keys = function()
-  map("n", "<C-s>", "<cmd>MarkdownPreviewToggle<cr>", { desc = "MarkdownPreviewToggle" })
+M.mkpv = function()
+  map("n", "<C-m>", "<cmd>MarkdownPreviewToggle<cr>", { desc = "MarkdownPreviewToggle" })
 end
 
 -- vimtex
-M.vimtex_keys = function()
+M.vimtex = function()
   map("n", "<localleader>li", "<plug>(vimtex-info)", { desc = ":VimtexInfo" })
   map("n", "<localleader>ll", "<plug>(vimtex-compile)", { desc = ":VimtexCompile" })
   map("n", "<localleader>lk", "<plug>(vimtex-stop)", { desc = ":VimtexStop" })
@@ -69,7 +71,7 @@ M.vimtex_keys = function()
 end
 
 -- lspconfig
-M.lspconfig = function(bufnr)
+M.lspconfig_attach = function(bufnr)
   map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP Go to declaration", buffer = bufnr})
   map("n", "gd", vim.lsp.buf.definition, { desc = "LSP Go to definition", buffer = bufnr})
   map("n", "gi", vim.lsp.buf.implementation, { desc = "LSP Go to implementation", buffer = bufnr})
@@ -109,15 +111,15 @@ end
 
 -- Conform
 M.Conform = function(c_api)
-  map("n", "<leader>fm", c_api.format({ lsp_fallback = true }), { desc = "format files"})
+  map("n", "<leader>fm", function() c_api.format({ lsp_fallback = true }) end, { desc = "format files"})
 end
 
 -- Tabufline
-M.Tabufline = function(tl_api)
+M.Tabufline = function(tfl_api)
   map("n", "<leader>b", "<cmd>enew<cr>", { desc = "buffer new" })
-  map("n", "<tab>", tl_api.next(), { desc = "goto next buffer" })
-  map("n", "<S-tab>", tl_api.prev(), { desc = "goto prev buffer" })
-  map("n", "<leader>x", tl_api.close_buffer(), { desc = "close buffer" })
+  map("n", "<tab>", function() tfl_api.next() end, { desc = "goto next buffer" })
+  map("n", "<S-tab>", function() tfl_api.prev() end, { desc = "goto prev buffer" })
+  map("n", "<leader>x", function() tfl_api.close_buffer() end, { desc = "close buffer" })
 end
 
 -- Telescope
@@ -138,11 +140,11 @@ end
 
 -- chadterm
 M.chadterm = function(ct_api)
-  map("n", "<leader>h", ct_api.new({pos = "sp"}), { desc = "new horizontal term" })
-  map("n", "<leader>v", ct_api.new({pos = "vsp"}), { desc = "new vertial term" })
-  map({"n", "t"}, "<A-v>", ct_api.toggle({pos = "vsp", id = "vtoggleTerm"}), {desc = "toggle vertical term"})
-  map({"n", "t"}, "<A-h>", ct_api.toggle({pos = "sp", id = "htoggleTerm"}), {desc = "toggle horizontal term"})
-  map({"n", "t"}, "<A-i>", ct_api.toggle({pos = "float", id = "floatTerm"}), {desc = "toggle float term"})
+  map("n", "<leader>h", function() ct_api.new({pos = "sp"}) end, { desc = "new horizontal term" })
+  map("n", "<leader>v", function() ct_api.new({pos = "vsp"}) end, { desc = "new vertial term" })
+  map({"n", "t"}, "<A-v>", function() ct_api.toggle({pos = "vsp", id = "vtoggleTerm"}) end, {desc = "toggle vertical term"})
+  map({"n", "t"}, "<A-h>", function() ct_api.toggle({pos = "sp", id = "htoggleTerm"}) end, {desc = "toggle horizontal term"})
+  map({"n", "t"}, "<A-i>", function() ct_api.toggle({pos = "float", id = "floatTerm"}) end, {desc = "toggle float term"})
 end
 
 -- whichkey
@@ -150,6 +152,7 @@ M.whichkey = function()
   map("n", "<leader>wk", function()
     vim.cmd("Whichkey " .. vim.fn.input("WhichKey: "))
   end, { desc = "whichkey query lookup" })
+  map("n", "<leader>wK", "<cmd>WhichKey <cr>", { desc = "whichkey all keymaps" })
 end
 
 -- blankline
@@ -171,7 +174,7 @@ M.blankline = function(ibl_api)
 end
 
 -- gitsigns
-M.gitsigns = function(gs_api, bufnr)
+M.gitsigns_attach = function(gs_api, bufnr)
   map("n", "<leader>rh", gs_api.reset_hunk, { desc = "Reset Hunk", buffer = bufnr })
   map("n", "<leader>ph", gs_api.preview_hunk, { desc = "Preview Hunk", buffer = bufnr })
   map("n", "<leader>gb", gs_api.blame_line, { desc = "Blame Line", buffer = bufnr })
