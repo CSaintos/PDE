@@ -1,6 +1,6 @@
 <h1 align="center">PDE</h1>
 
-- My Personal Development Environment (dotfiles)
+- My Personal Development Environment
 - Custom child config of [NvChad](https://github.com/NvChad/NvChad)
 
 ## Showcase
@@ -28,7 +28,7 @@ rm ~/AppData/Local/nvim-data -Recurse -Force
 ## Install 
 - `git clone https://github.com/CSaintos/PDE.git ~/.config/nvim && nvim`
 - Wait for Lazy to install plugins then type `:MasonInstallAll`.
-  - Wait for Mason to install all lsps, formaters, debuggers, and linters that come with NvChad by default before quiting `:qa`
+  - Wait for Mason to install all lsps, formaters, debuggers, and linters before quiting `:qa`
 - If you decide to use a shell other than ✨nushell✨, then you will need to update the `options.lua` file.
   - set `sh = ` to your preferred shell
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
@@ -82,4 +82,4 @@ Diagnostics:
 - `<space>ch` - Keymaps
 
 ## Special thanks to 
-- [@siduck](https://github.com/siduck), co-authors, and contributors for making the most popular Neovim commmon-plugin boilerplate removal config [NvChad](https://github.com/NvChad/NvChad), as well as their custom ui and base46 plugins. My custom config wouldn't have been possible without you 😍.
+- [@siduck](https://github.com/siduck) and contributors for [NvChad/ui](https://github.com/NvChad/ui) and [NvChad/base46](https://github.com/NvChad/Base46) plugins.
