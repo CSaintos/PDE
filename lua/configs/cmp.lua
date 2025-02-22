@@ -1,4 +1,4 @@
-local cmp = require("cmp")
+local cmp = require "cmp"
 
 dofile(vim.g.base46_cache .. "cmp")
 
@@ -7,7 +7,7 @@ local cmp_style = cmp_ui.style
 
 local field_arrangement = {
   atom = { "kind", "abbr", "menu" },
-  atom_colored = { "kind", "abbr", "menu" }
+  atom_colored = { "kind", "abbr", "menu" },
 }
 
 local formatting_style = {
@@ -15,7 +15,7 @@ local formatting_style = {
   fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
 
   format = function(_, item)
-    local icons = require("nvchad.icons.lspkind")
+    local icons = require "nvchad.icons.lspkind"
     local icon = (cmp_ui.icons and icons[item.kind]) or ""
 
     if cmp_style == "atom" or cmp_style == "atom_colored" then
@@ -28,7 +28,7 @@ local formatting_style = {
     end
 
     return item
-  end
+  end,
 }
 
 local function border(hl_name)
@@ -46,23 +46,23 @@ end
 
 local options = {
   completion = {
-    compleopt = "menu,menuone"
+    compleopt = "menu,menuone",
   },
   window = {
     completion = {
-      side_padding = (cmp_style ~= "atom" and cmp_type ~= "atom_colored") and 1 or 0,
+      side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
       winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
-      scrollbar = false
+      scrollbar = false,
     },
     documentation = {
-      border = border("CmpDocBorder"),
-      winhighlight = "Normal:CmpDoc"
-    }
+      border = border "CmpDocBorder",
+      winhighlight = "Normal:CmpDoc",
+    },
   },
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
-    end
+    end,
   },
   formatting = formatting_style,
   mapping = {
@@ -72,10 +72,10 @@ local options = {
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
-    ["<C-l>"] = cmp.mapping.confirm({
+    ["<C-l>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
-      select = true
-    }),
+      select = true,
+    },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -84,7 +84,7 @@ local options = {
       else
         fallback()
       end
-    end, {"i", "s"}),
+    end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -93,20 +93,19 @@ local options = {
       else
         fallback()
       end
-    end, {"i", "s"})
+    end, { "i", "s" }),
   },
   sources = {
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "nvim_lua" },
-    { name = "path" }
-  }
+    { name = "path" },
+  },
 }
 
-if cmp_style ~= "atom" and cmp_style ~= "atom_colored"
-then
-  options.window.completion.border = border("CmpBorder")
+if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
+  options.window.completion.border = border "CmpBorder"
 end
 
 return options

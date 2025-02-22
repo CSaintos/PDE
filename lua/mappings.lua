@@ -24,7 +24,7 @@ map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "lsp diagnostic locli
 map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
 map("n", "j", "gj", { desc = "Do not skip over wrap lines (down)" })
 map("n", "k", "gk", { desc = "Do not skip over wrap lines (up)" })
-map("n", "x", '"_', { desc = "Delete char without saving to clipboard" })
+map("n", "x", "<leader>x", { desc = "Close current buffer", remap = true })
 map("n", "<C-a>", "<C-a>", { desc = "Increment digit" })
 map("n", "<C-x>", "<C-x>", { desc = "Decrement digit" })
 map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
@@ -53,9 +53,20 @@ map({ "n", "o", "x" }, "<S-l>", "g_", { desc = "goto end of line (text)" })
 
 -- nvimtree
 M.nvimtree_attach = function(nt_api, bufnr)
-  map("n", "<C-p>", nt_api.tree.change_root_to_parent, { desc = "Nvimtree cd parent directory", buffer = bufnr })
-  map("n", "h", nt_api.node.navigate.parent_close, { desc = "Nvimtree close directory at cursor", buffer = bufnr })
-  map("n", "l", nt_api.node.open.edit, { desc = "Nvimtree open at cursor", buffer = bufnr })
+  map("n", "<C-p>", nt_api.tree.change_root_to_parent, { desc = "CD parent directory", buffer = bufnr })
+  map("n", "h", nt_api.node.navigate.parent_close, { desc = "Close directory at cursor", buffer = bufnr })
+  map("n", "l", function()
+    if nt_api.tree.get_node_under_cursor().name ~= ".." then
+      nt_api.node.open.edit()
+    end
+  end, { desc = "Open at cursor", buffer = bufnr })
+  map("n", "<cr>", function()
+    if nt_api.tree.get_node_under_cursor().name ~= ".." then
+      nt_api.node.open.edit()
+    else
+      nt_api.tree.toggle_help()
+    end
+  end, { desc = "Open", buffer = bufnr })
 end
 
 M.nvimtree = function()

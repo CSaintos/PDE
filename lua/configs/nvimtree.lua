@@ -29,21 +29,23 @@ local options = {
   actions = {
     open_file = {
       resize_window = true,
-    }
+    },
   },
   renderer = {
-    root_folder_label = false,
+    root_folder_label = function(_)
+      return "Help: g?"
+    end,
     highlight_git = true,
     highlight_opened_files = "none",
     indent_markers = {
-      enable = true
+      enable = true,
     },
     icons = {
       show = {
         file = true,
         folder = true,
         folder_arrow = false,
-        git = true
+        git = true,
       },
       glyphs = {
         default = "󰈚",
@@ -66,10 +68,10 @@ local options = {
           untracked = "★",
           deleted = "",
           ignored = "◌",
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 }
 local nt_api_s, nt_api = pcall(require, "nvim-tree.api")
 if not nt_api_s then
@@ -84,8 +86,8 @@ end
 options.actions.open_file = {
   resize_window = true,
   window_picker = {
-    enable = false
-  }
+    enable = false,
+  },
 }
 
 options.on_attach = my_on_attach

@@ -94,7 +94,7 @@ return {
     },
     init = function()
       vim.schedule(function()
-        local ibl_api = require("ibl.scope")
+        local ibl_api = require "ibl.scope"
         require("mappings").blankline(ibl_api)
       end)
     end,
@@ -122,10 +122,10 @@ return {
     lazy = false,
     init = function()
       vim.schedule(function()
-        local tfl_api = require("nvchad.tabufline")
+        local tfl_api = require "nvchad.tabufline"
         require("mappings").Tabufline(tfl_api)
         require("mappings").NvCheatsheet()
-        local ct_api = require("nvchad.term")
+        local ct_api = require "nvchad.term"
         require("mappings").chadterm(ct_api)
       end)
     end,
@@ -154,16 +154,23 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
+    build = function(plugin)
+      if vim.fn.executable "npx" then
+        vim.cmd("!cd" .. plugin.dir .. " && cd app && npx --yes yarn install")
+      else
+        vim.cmd [[Lazy load markdown-preview.nvim]]
+        vim.fn["mkdp#util#install"]()
+      end
     end,
     init = function()
       vim.schedule(require("mappings").mkpv)
-      vim.g.mkdp_filetypes = { "markdown" }
+      if vim.fn.executable "npx" then
+        vim.g.mkdp_filetypes = { "markdown" }
+      end
     end,
     config = function()
       require "configs.markdown-preview"
-    end
+    end,
   },
   -- code formatter
   {
@@ -175,7 +182,7 @@ return {
     },
     init = function()
       vim.schedule(function()
-        local c_api = require("conform")
+        local c_api = require "conform"
         require("mappings").Conform(c_api)
       end)
     end,
@@ -250,7 +257,7 @@ return {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = function()
-      return require "configs/mason"
+      return require "configs.mason"
     end,
     config = function(_, opts)
       require("mason").setup(opts)
