@@ -4,7 +4,8 @@
 - Custom child config of [NvChad](https://github.com/NvChad/NvChad)
 
 ## Showcase
-![general](./showcase/pde_general.png)
+![nvdash](./showcase/Nvdash.png)
+![editor](./showcase/editor.png)
 
 ## Requirements
 - Install [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)

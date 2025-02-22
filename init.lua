@@ -5,7 +5,8 @@ vim.g.maplocalleader = "\\"
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
+-- https://vi.stackexchange.com/questions/46485/how-to-fix-undefined-field-fs-stat-warning-in-lua-language-server-for-neovim-0
+if not vim.uv.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
   vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
