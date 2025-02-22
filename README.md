@@ -12,12 +12,6 @@
   <!-- - My [NuConfig](https://github.com/CSaintos/NuConfig) -->
 - (Optional) Install [Ripgrep](https://github.com/BurntSushi/ripgrep) Telescope grep improvement.
 - Install a [NerdFont](https://www.nerdfonts.com/) and set the nerdfont in your preferred terminal.
-- If on Windows, Download [msys2](https://www.msys2.org/)
-  - run the installer.
-  - Start the MSYS2 application, run `pacman -Syu` to update packages.
-  - Install make: `pacman -S mingw-w64-ucrt64-x86_64-make`
-  - In `C:/msys64/ucrt64/bin` copy `copy mingw32-make.exe make.exe`
-  - Add `C:/msys64/ucrt64/bin` to system path (environment variables).
 - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is necessary for building one of the plugins.
 - If on Windows, Create a System environment variable
   - `XDG_CONFIG_HOME` = `C:/Users/<user>/.config`
@@ -28,24 +22,18 @@ rm -rf ~/.config/nvim
 rm -rf ~/.local/share/nvim
 
 # Windows Powershell
-rm ~/.config/nvim -Recurse -Force
 rm ~/AppData/Local/nvim-data -Recurse -Force
 ```
 
 ## Install 
 - `git clone https://github.com/CSaintos/PDE.git ~/.config/nvim && nvim`
-<!-- - Once in nvim, navigate to line that says `use({"nvim-telescope/telescope-fzf-native.nvim",run="C:/MinGW/bin/mingw32-make.exe"}) -- telescope dependency` -->
-<!--   - Change text at `run="C:/..."` to your make installation path `run="path/to/make"`  -->
-<!--     - The make executable: for Unix is `make`, for windows is `mingw32-make.exe` -->
 - Wait for Lazy to install plugins then type `:MasonInstallAll`.
   - Wait for Mason to install all lsps, formaters, debuggers, and linters that come with NvChad by default before quiting `:qa`
 - If you decide to use a shell other than ✨nushell✨, then you will need to update the `options.lua` file.
   - set `sh = ` to your preferred shell
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
-- Current bug with nushell and Lazy: markdown-preview will need to be installed manually due to unable to invoke nushell.
-  - locate markdown-preview in `nvim-data/lazy/markdown-preview/app`, and run `npm install`
-- To get the vue-language-server working you may need to install the vls parser. Execute `npm install -g vls`
-- To get the javascript/typescript linting engine to work. Execute `npm i -g vscode-langservers-extracted`
+- (Optional) To get the vue-language-server working you may need to install the vls parser. Execute `npm install -g vls`
+- (Optional) To get the javascript/typescript linting engine to work. Execute `npm i -g vscode-langservers-extracted`
 
 ## Language Support
 - Various (programming/scripting/markup) languages listed below are supported natively using this configuration.
@@ -61,6 +49,7 @@ rm ~/AppData/Local/nvim-data -Recurse -Force
       - [msys2](https://www.msys2.org/)
       - Start the MSYS2 application, run `pacman -Syu` to update packages.
       - Install clang: `pacman -S mingw-w64-ucrt64-x86_64-clang`
+        - If `clang --version` isn't working, make sure to add the `bin` to system path (environment variables)
   - Create a [Clangd config](https://clangd.llvm.org/config#files).
     - ex:
 ```yml
