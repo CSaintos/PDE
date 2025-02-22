@@ -77,7 +77,9 @@ Diagnostics:
 ```
 
 ## Documentation
-- [NvChad docs](https://nvchad.com/docs/quickstart/post-install)
+- `:h lazy.nvim` - Lazy Plugin Manager docs
+- `:h nvui` - NvChad UI/base46 docs
+- `<space>ch` - Keymaps
 
 ## Special thanks to 
 - [@siduck](https://github.com/siduck), co-authors, and contributors for making the most popular Neovim commmon-plugin boilerplate removal config [NvChad](https://github.com/NvChad/NvChad), as well as their custom ui and base46 plugins. My custom config wouldn't have been possible without you 😍.
