@@ -121,6 +121,7 @@ return {
   },
   {
     "NvChad/ui",
+    lazy = false,
     init = function()
       vim.schedule(function()
         local tfl_api = require "nvchad.tabufline"

@@ -7,7 +7,7 @@ vim.g.mkdp_preview_options = {
     end,
     diagramName = "uml",
     imageFormat = "svg",
-    -- render = "markdown-it"
+    render = "markdown-it",
     server = "http://localhost:4000/plantuml"
   }
 }

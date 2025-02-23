@@ -33,6 +33,8 @@ rm ~/AppData/Local/nvim-data -Recurse -Force
 - If you decide to use a shell other than ✨nushell✨, then you will need to update the `options.lua` file.
   - set `sh = ` to your preferred shell
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
+- Current bug with nushell and Lazy: markdown-preview will need to be installed manually due to unable to invoke nushell.
+  - locate markdown-preview in nvim-data/lazy/markdown-preview/app, and run npm install
 - (Optional) To get the vue-language-server working you may need to install the vls parser. Execute `npm install -g vls`
 - (Optional) To get the javascript/typescript linting engine to work. Execute `npm i -g vscode-langservers-extracted`
 

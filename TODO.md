@@ -16,3 +16,6 @@
 
 ## Conform
 - See if its possible to make a custom formatter for auto formatting and deformatting code.
+
+## Markdown-preview
+- build command still doesn't work
