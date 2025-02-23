@@ -16,6 +16,3 @@
 
 ## Conform
 - See if its possible to make a custom formatter for auto formatting and deformatting code.
-
-## Nvdash
-- New help tags

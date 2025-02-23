@@ -24,7 +24,6 @@ map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "lsp diagnostic locli
 map("n", "<leader>/", "gcc", { desc = "comment toggle", remap = true })
 map("n", "j", "gj", { desc = "Do not skip over wrap lines (down)" })
 map("n", "k", "gk", { desc = "Do not skip over wrap lines (up)" })
-map("n", "x", "<leader>x", { desc = "Close current buffer", remap = true })
 map("n", "<C-a>", "<C-a>", { desc = "Increment digit" })
 map("n", "<C-x>", "<C-x>", { desc = "Decrement digit" })
 map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
@@ -145,6 +144,9 @@ M.Tabufline = function(tfl_api)
   map("n", "<leader>x", function()
     tfl_api.close_buffer()
   end, { desc = "close buffer" })
+  map("n", "x", function()
+    tfl_api.close_buffer()
+  end, { desc = "close buffer" })
 end
 
 -- Telescope
@@ -179,7 +181,7 @@ M.chadterm = function(ct_api)
   map({ "n", "t" }, "<A-v>", function()
     ct_api.toggle { pos = "vsp", id = "vtoggleTerm" }
   end, { desc = "toggle vertical term" })
-  map({ "n", "t" }, "<A-h>", function()
+  map({ "n", "t" }, "<A-b>", function()
     ct_api.toggle { pos = "sp", id = "htoggleTerm" }
   end, { desc = "toggle horizontal term" })
   map({ "n", "t" }, "<A-i>", function()

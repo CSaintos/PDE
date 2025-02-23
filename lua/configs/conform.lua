@@ -3,7 +3,7 @@ local options = {
     -- ["*"] = {
     --   "trim_whitespace"
     -- },
-    lua = { "stylua" },
+    -- lua = { "stylua" },
     -- css = { "prettier" },
     -- html = { "prettier" },
   },

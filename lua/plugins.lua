@@ -3,6 +3,10 @@ return {
   {
     "nvim-lua/plenary.nvim",
   },
+  -- lua-neovim ui modules
+  {
+    "nvzone/volt",
+  },
   -- plugin disabler for large files
   {
     "LunarVim/bigfile.nvim",
@@ -111,15 +115,12 @@ return {
   },
   {
     "NvChad/base46",
-    branch = "v3.0",
     build = function()
       require("base46").load_all_highlights()
     end,
   },
   {
     "NvChad/ui",
-    branch = "v3.0",
-    lazy = false,
     init = function()
       vim.schedule(function()
         local tfl_api = require "nvchad.tabufline"
