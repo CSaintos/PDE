@@ -1,5 +1,6 @@
 local M = {} -- keymap exports
 local map = vim.keymap.set
+local unmap = vim.keymap.del
 
 --> Standard Keymaps
 -- Insert Mode Keymaps
@@ -66,6 +67,9 @@ M.nvimtree_attach = function(nt_api, bufnr)
       nt_api.tree.toggle_help()
     end
   end, { desc = "Open", buffer = bufnr })
+  unmap("n", "<Tab>", { desc = "Open Preview", buffer = bufnr })
+  unmap("n", "o", { desc = "Open", buffer = bufnr })
+  unmap("n", "O", { desc = "Open (No Window)", buffer = bufnr })
 end
 
 M.nvimtree = function()

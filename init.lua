@@ -30,3 +30,11 @@ require "options"
 vim.schedule(function()
   require "mappings"
 end)
+-- does what mason-lspconfig would do but better
+vim.schedule(function()
+  local ei = require("configs.mason").ensure_installed
+  local ii = require("mason-registry").is_installed
+  if not ii(ei[math.random(#ei)]) then
+    vim.cmd("MasonInstallAll")
+  end
+end)

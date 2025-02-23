@@ -28,8 +28,7 @@ rm ~/AppData/Local/nvim-data -Recurse -Force
 
 ## Install 
 - `git clone https://github.com/CSaintos/PDE.git ~/.config/nvim && nvim`
-- Wait for Lazy to install plugins then type `:MasonInstallAll`.
-  - Wait for Mason to install all lsps, formaters, debuggers, and linters before quiting `:qa`
+- Wait for Lazy to install plugins then wait for Mason to install all lsps, formaters, debuggers, and linters before quiting `:qa`.
 - If you decide to use a shell other than ✨nushell✨, then you will need to update the `options.lua` file.
   - set `sh = ` to your preferred shell
   - set `shellcmdflag = ` to your shell's command flags (or remove this option)
