@@ -220,4 +220,38 @@ M.gitsigns_attach = function(gs_api, bufnr)
   map("n", "<leader>gb", gs_api.blame_line, { desc = "Blame Line", buffer = bufnr })
 end
 
+-- cmp
+M.cmp = function(cmp_api)
+  return {
+    ["<C-p>"] = cmp_api.mapping.select_prev_item(),
+    ["<C-n>"] = cmp_api.mapping.select_next_item(),
+    ["<C-d>"] = cmp_api.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp_api.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp_api.mapping.complete(),
+    ["<C-e>"] = cmp_api.mapping.close(),
+    ["<C-l>"] = cmp_api.mapping.confirm {
+      behavior = cmp_api.ConfirmBehavior.Insert,
+      select = true,
+    },
+    ["<Tab>"] = cmp_api.mapping(function(fallback)
+      if cmp_api.visible() then
+        cmp_api.select_next_item()
+      elseif require("luasnip").expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp_api.mapping(function(fallback)
+      if cmp_api.visible() then
+        cmp_api.select_prev_item()
+      elseif require("luasnip").jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  }
+end
+
 return M
