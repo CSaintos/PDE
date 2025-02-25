@@ -2,8 +2,6 @@
 
 ## Keybindings
 - Fix whichkey binding hints 
-- NvCheatSheet expand (make it the same as whichkey and vise versa)
-  - organize them too.
 
 ## Language specific features
 ### C++
