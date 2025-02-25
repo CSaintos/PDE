@@ -26,6 +26,9 @@ return {
       dofile(vim.g.base46_cache .. "nvimtree")
       require("nvim-tree").setup(opts)
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   -- file manager icons
   {
@@ -41,20 +44,30 @@ return {
   -- shortcuts helper ui
   {
     "folke/which-key.nvim",
+    lazy = false,
     keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
     cmd = "WhichKey",
     init = function()
       vim.schedule(require("mappings").whichkey)
     end,
+    opts = function()
+      return require("configs.whichkey")
+    end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "whichkey")
       require("which-key").setup(opts)
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   -- fuzzy file finder
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "folke/which-key.nvim"
+    },
     cmd = "Telescope",
     init = function()
       vim.schedule(require("mappings").telescope)
@@ -112,12 +125,24 @@ return {
 
       dofile(vim.g.base46_cache .. "blankline")
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   {
     "NvChad/base46",
     build = function()
       require("base46").load_all_highlights()
     end,
+    init = function()
+      vim.schedule(function()
+        local b46_api = require "base46"
+        require("mappings").base46(b46_api)
+      end)
+    end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   {
     "NvChad/ui",
@@ -134,6 +159,9 @@ return {
     config = function()
       require "nvchad"
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   -- RGB hexcode coloring
   {
@@ -173,6 +201,9 @@ return {
     config = function()
       require "configs.markdown-preview"
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   -- code formatter
   {
@@ -193,6 +224,9 @@ return {
       local options = require("utils").concat_kv_tables(opts, require "configs.conform")
       require("conform").setup(options)
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   -- language parsers (typically used for syntax highlighting)
   {
@@ -210,6 +244,7 @@ return {
   -- code completions
   {
     "hrsh7th/nvim-cmp",
+    cond = false,
     event = "InsertEnter",
     dependencies = {
       -- code snippets
@@ -321,6 +356,9 @@ return {
       require "configs.vimtex"
       vim.schedule(require("mappings").vimtex)
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   -- debug adapter server manager
   {

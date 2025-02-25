@@ -11,6 +11,7 @@ M.base46 = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
   },
+  theme_toggle = { "everforest", "vesper"}
 }
 
 M.ui = {

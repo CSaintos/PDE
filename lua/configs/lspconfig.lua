@@ -155,4 +155,26 @@ lspconfig.clangd.setup {
   },
 }
 
+local default_diagnostic_config = {
+  virtual_text = false,
+  underline = true,
+  severity_sort = true,
+  float = {
+    focusable = true,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+  signs = {
+    active = true
+  }
+}
+
+vim.diagnostic.config(default_diagnostic_config)
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+require("lspconfig.ui.windows").default_options.border = "rounded"
+
 return M
