@@ -112,19 +112,10 @@ M.lspconfig_attach = function(bufnr)
 end
 
 -- dap
-M.dap = {
-  plugin = true,
-  n = {
-    ["<leader>db"] = {
-      "<cmd>DapToggleBreakpoint<cr>",
-      "DAP: add breakpoint at line",
-    },
-    ["<leader>dr"] = {
-      "<cmd>DapContinue<cr>",
-      "DAP: run or continue the debugger",
-    },
-  },
-}
+M.dap = function()
+  map("n", "<leader>db", "<cmd>DapToggleBreakpoint<cr>", { desc = "DAP: add breakpoint" })
+  map("n", "<leader>dr", "<cmd>DapContinue<cr>", { desc = "DAP: run/continue debugger" })
+end
 
 -- Base46
 M.base46 = function(b46_api)

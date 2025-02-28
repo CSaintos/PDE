@@ -6,8 +6,6 @@
 ## Language specific features
 ### C++
 - bugfix autoindenting to use user options.
-- enable VISUAL_MODE (lsp aware) comments.
-- Add debugger
 
 ## Tabufline
 - customize mode line to Ln <#>/<#> %#, Col <#>/<#> %#

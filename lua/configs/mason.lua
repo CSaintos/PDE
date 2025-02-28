@@ -31,6 +31,7 @@ local options = {
     "groovy-language-server", -- groovy lsp
     "jdtls", -- java lsp
     "clangd", -- cpp lsp
+    "codelldb", -- cpp debugger
   }
 }
 
