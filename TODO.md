@@ -1,8 +1,5 @@
 # TODO notes for implementation or cleaning
 
-## Keybindings
-- Fix whichkey binding hints 
-
 ## Language specific features
 ### C++
 - bugfix autoindenting to use user options.

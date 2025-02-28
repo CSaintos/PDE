@@ -94,12 +94,18 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = "User FilePost",
+    init = function()
+      vim.schedule(require("mappings").gitsigns)
+    end,
     opts = function()
       return require "configs.gitsigns"
     end,
     config = function(_, opts)
       require("gitsigns").setup(opts)
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   -- Indentation guides
   {
@@ -308,6 +314,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
+    init = function()
+      vim.schedule(require("mappings").lspconfig)
+    end,
     config = function()
       require("configs.lspconfig").defaults()
       require "configs.lspconfig"
@@ -365,11 +374,17 @@ return {
     "mfussenegger/nvim-dap",
     event = "VeryLazy",
     init = function()
-      vim.schedule(require("mappings").dap)
+      vim.schedule(function()
+        local dap_api = require "dap"
+        require("mappings").dap(dap_api)
+      end)
     end,
     config = function()
       require("configs.dap")
     end,
+    dependencies = {
+      "folke/which-key.nvim"
+    }
   },
   -- debugger ui
   {
