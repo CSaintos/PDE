@@ -11,3 +11,5 @@ vim.g.mkdp_preview_options = {
     server = "http://localhost:4000/plantuml"
   }
 }
+
+vim.g.mkdp_auto_close = 0
