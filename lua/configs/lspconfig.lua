@@ -65,6 +65,7 @@ local lspconfig = require("lspconfig")
 local root_pattern = lspconfig.util.root_pattern
 local servers = {
   "html",
+  "eslint",
   "cssls",
   "vuels",
   "nushell"
