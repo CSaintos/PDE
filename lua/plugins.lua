@@ -326,6 +326,7 @@ return {
   -- code linter ui for errors and warnings - etc.
   {
     "mfussenegger/nvim-lint",
+    cond = false,
     event = "VeryLazy",
     config = function()
       require "configs.lint"

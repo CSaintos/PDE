@@ -150,7 +150,7 @@ lspconfig.clangd.setup {
   init_options = {
     clangdFileStatus = true, -- Provides info about activity on clangd's per-file worker thread
     usePlaceholders = true,
-    completeUnimported = true,
+    completeUnimported = false,
     semanticHighlighting = true,
   },
 }

@@ -76,7 +76,7 @@ for setting, value in pairs(g) do
   vim.g[setting] = value
 end
 
-vim.lsp.set_log_level "debug"
+vim.lsp.set_log_level "off"
 vim.opt.shortmess:append "sI"
 vim.opt.whichwrap:append "<>[]hl"
 

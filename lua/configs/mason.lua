@@ -26,7 +26,7 @@ local options = {
     "omnisharp", -- csharp lsp
     "vue-language-server", -- vue lsp
     "typescript-language-server", -- javascript / typescript lsp
-    "eslint-lsp", -- javascript / typescript linter
+    -- "eslint-lsp", -- javascript / typescript linter
     "js-debug-adapter", -- javascript / typescript debug adapter
     "groovy-language-server", -- groovy lsp
     "jdtls", -- java lsp
