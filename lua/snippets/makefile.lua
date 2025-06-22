@@ -118,7 +118,7 @@ ls.add_snippets("make", {
       "#* Constants",
       "vpath %.cpp $(SRCDIRS)",
       "DLIBS = $(foreach LINKDIR, $(patsubst -L%, %, $(LINKDIRS)), $(call find_file, $(DLINK_FILES), $(LINKDIR)))",
-      "SLIBS = $(foreach LINKDIR, $(patsubst -L%, % $(LINKDIRS)), $(call find_file, $(SLINK_FILES), $(LINKDIR)))",
+      "SLIBS = $(foreach LINKDIR, $(patsubst -L%, %, $(LINKDIRS)), $(call find_file, $(SLINK_FILES), $(LINKDIR)))",
       "OUT_DLIBS = $(foreach DLINK_FILE, $(DLINK_FILES), $(TARGETDIR)/$(DLINK_FILE))",
       "vpath %.$(DLINK_TYPE) $(patsubst -L%, %, $(LINKDIRS))",
       "OBJECTS = $(addprefix $(OBJDIR)/, $(patsubst %.cpp, %.o, $(SRCFILES)))",
