@@ -90,7 +90,7 @@ ls.add_snippets("make", {
       "EXE_TYPE =",
       "STATIC_LINK_FLAG=",
       "DYNAMIC_LINK_FLAG=",
-      "ASNEED_LINK_FLAG=",
+      "AS_NEED_LINK_FLAG=",
       "RPATH_LINK_FLAG=-Wl,-rpath,@executable_path",
       "endif",
       "ifeq ($(filter-out Windows Linux, $(SYS)),)",
