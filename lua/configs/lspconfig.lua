@@ -61,7 +61,7 @@ local on_attach = M.on_attach
 local on_init = M.on_init
 local capabilities = M.capabilities
 
-local lspconfig = require("lspconfig")
+local lspconfig = vim.lsp.config
 local root_pattern = lspconfig.util.root_pattern
 local servers = {
   "html",
